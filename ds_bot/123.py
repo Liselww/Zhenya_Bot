@@ -35,7 +35,7 @@ async def on_ready():
 
 
 @bot.event
-async def on_member_join:
+async def on_member_join(member):
     try:
         await member.send(f"{member.name}, принеси мне пару тонн БигМаков!🍔🍔🍔")
         print(f"Sent welcome message to {member.name}")
@@ -155,14 +155,14 @@ async def reply(ctx, *, question):
 @commands.has_permissions(manage_roles=True)
 async def remove_command(ctx, role: discord.Role = None):
     try:
-        # Якщо роль не вказана, шукаємо "oyak" роль
+        
         if role is None:
             role = discord.utils.get(ctx.guild.roles, name=secret_role)
             if role is None:
                 await ctx.send("❌ Роль 'oyak' не знайдена!")
                 return
 
-        # Перевіряємо, чи є роль у автора
+        
         if role not in ctx.author.roles:
             await ctx.send(f"❌ У вас немає ролі {role.mention}!")
             return
@@ -170,7 +170,6 @@ async def remove_command(ctx, role: discord.Role = None):
         # Видаляємо роль
         await ctx.author.remove_roles(role)
 
-        # Підтвердження
         await ctx.send(f"✅ Роль {role.mention} успішно видалено!")
 
     except discord.Forbidden:
@@ -282,7 +281,7 @@ async def play(ctx):
         await asyncio.sleep(0.5)
 
     try:
-        await ctx.send(f"🎶 **Запускаю {MUSIC_FILE}...**")
+        await ctx.send("🎶 **Запускаю базовану музичку...**")
 
         with open(MUSIC_FILE, 'rb') as f:
             audio_data = f.read()
