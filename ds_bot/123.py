@@ -35,7 +35,7 @@ async def on_ready():
 
 
 @bot.event
-async def on_member_join(member):
+async def on_member_join:
     try:
         await member.send(f"{member.name}, принеси мне пару тонн БигМаков!🍔🍔🍔")
         print(f"Sent welcome message to {member.name}")
